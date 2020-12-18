@@ -1,66 +1,233 @@
-Plant.destroy_all
-Person.destroy_all
-PlantParenthood.destroy_all
-Plant.reset_pk_sequence
-Person.reset_pk_sequence
-PlantParenthood.reset_pk_sequence
+MovieGenre.destroy_all
+Rental.destroy_all
+Dvd.destroy_all
+Client.destroy_all
+Genre.destroy_all
+Movie.destroy_all
+MovieGenre.reset_pk_sequence
+Rental.reset_pk_sequence
+Dvd.reset_pk_sequence
+Client.reset_pk_sequence
+Genre.reset_pk_sequence
+Movie.reset_pk_sequence
 
-########### different ways to write your seeds ############
 
-# 1: save everything to variables (makes it easy to connect models, best for when you want to be intentional about your seeds)
-basil = Plant.create(name: "basil the herb", bought: 20200610, color: "green")
-sylwia = Person.create(name: "Sylwia", free_time: "none", age: 30)
-pp1 = PlantParenthood.create(plant_id: basil.id, person_id: sylwia.id, affection: 1_000_000, favorite?: true)
+def create_movie_joins(movie, genre_array)
+    genre_array.each{|genre| MovieGenre.create(movie_id: movie.id, genre_id: genre.id)}
+end
 
-# 2. Mass create -- in order to connect them later IN SEEDS (not through the app) you'll need to find their id
-## a. by passing an array of hashes:
-Plant.create([
-    {name: "Corn Tree", bought: 20170203, color: "green"},
-    {name: "Prayer plant", bought: 20190815, color: "purple"},
-    {name: "Cactus", bought: 20200110, color: "ugly green"}
-])
-## b. by interating over an array of hashes:
-plants = [{name: "Elephant bush", bought: 20180908, color: "green"},
-    {name: "Photos", bought: 20170910, color: "green"},
-    {name: "Dragon tree", bought: 20170910, color: "green"},
-    {name: "Snake plant", bought: 20170910, color: "dark green"},
-    {name: "polka dot plant", bought: 20170915, color: "pink and green"},
-    {name: "Cactus", bought: 20200517, color: "green"}]
+####### GENRES ########
+puts "✨ creating genres... ✨"
 
-plants.each{|hash| Plant.create(hash)}
+action = Genre.create(name: "action")
+adaptation = Genre.create(name: "adaptation")
+adventure = Genre.create(name: "adventure")
+animation = Genre.create(name: "animation")
+biography = Genre.create(name: "biography")
+comedy = Genre.create(name: "comedy")
+crime = Genre.create(name: "crime")
+docudrama = Genre.create(name: "docudrama")
+documentary = Genre.create(name: "documentary")
+drama = Genre.create(name: "drama")
+fantasy = Genre.create(name: "fantasy")
+historical_period_drama = Genre.create(name: "historical period drama")
+history = Genre.create(name: "history")
+horror = Genre.create(name: "horror")
+melodrama = Genre.create(name: "melodrama")
+mystery = Genre.create(name: "mystery")
+romance = Genre.create(name: "romance")
+sci_fi = Genre.create(name: "sci-fi")
+sport = Genre.create(name: "sport")
+thriller = Genre.create(name: "thriller")
+war = Genre.create(name: "war")
 
-# 3. Use Faker and mass create
-## step 1: write a method that creates a person
-def create_person
-    free = ["mornings", "evenings", "always", "afternoons", "weekends", "none"].sample
+####### MOVIES ########
+puts "✨ creating movies and movie_genres... ✨"
 
-    person = Person.create(
-        name: Faker::Movies::HitchhikersGuideToTheGalaxy.character,
-        free_time: free,
-        age: rand(11...70)
+the_color_purple = Movie.create(
+    title: "The Color Purple",
+    year: 1985,
+    length: 154,
+    director: "Steven Spielberg",
+    description: "Whoopi Goldberg brings Alice Walker’s Pulitzer Prize-winning feminist novel to life as Celie, a Southern woman who suffered abuse over decades. A project brought to a hesitant Steven Spielberg by producer Quincy Jones, the film marks Spielberg’s first female lead.",
+    female_director: false
+)
+create_movie_joins(the_color_purple, [adaptation, historical_period_drama, drama])
+
+frida = Movie.create(
+            title: "Frida",
+            year: 2002,
+            length: 123,
+            director: "Julie Taymor",
+            description: "'Frida' chronicles the life Frida Kahlo shared unflinchingly and openly with Diego Rivera, as the young couple took the art world by storm. From her complex and enduring relationship with her mentor and husband to her illicit and controversial affair with Leon Trotsky, to her provocative and romantic entanglements with women, Frida Kahlo lived a bold and uncompromising life as a political, artistic, and sexual revolutionary.",
+            female_director: true
+)
+create_movie_joins(frida, [biography, adaptation, history, drama, romance])
+
+queen_of_katwe= Movie.create(
+            title: "Queen of Katwe",
+            year: 2016,
+            length: 144,
+            director: "Mira Nair",
+            description: "Living in Katwe, a slum in Kampala, Uganda, is a constant struggle for 10-year-old Phiona, her mother Nakku Harriet and younger members of her family. She and her younger brother help their mother sell maize in the market. She also helps care for her baby brother. Her world changes one day when she meets Robert Katende at a missionary program. Katende coaches soccer and teaches children to play chess at a local center. Curious, Phiona approaches and learns the game. She becomes fascinated with it and soon becomes a top player in the group under Katende's guidance.",
+            female_director: true
+)
+create_movie_joins(queen_of_katwe, [drama, sport, biography])
+
+perspepolis = Movie.create(
+            title: "Persepolis",
+            year: 2007,
+            length: 96,
+            director: "Marjane Satrapi",
+            description: "In 1970s Iran, Marjane 'Marji' Satrapi watches events through her young eyes and her idealistic family of a long dream being fulfilled of the hated Shah's defeat in the Iranian Revolution of 1979. However as Marji grows up, she witnesses first hand how the new Iran, now ruled by Islamic fundamentalists, has become a repressive tyranny on its own. With Marji dangerously refusing to remain silent at this injustice, her parents send her abroad to Vienna to study for a better life. However, this change proves an equally difficult trial with the young woman finding herself in a different culture loaded with abrasive characters and profound disappointments that deeply trouble her. Even when she returns home, Marji finds that both she and homeland have changed too much and the young woman and her loving family must decide where she truly belongs.",
+            female_director: true
+)
+create_movie_joins(persepolis, [animation, war, adaptation, history, biography])
+
+little_women = Movie.create(
+            title: "Little Women",
+            year: 1994,
+            length: 118,
+            director: "Gillian Armstrong",
+            description: "Louisa May Alcott's autobiographical account of her life with her three sisters in Concord, Massachusetts in the 1860s. With their father fighting in the American Civil War, sisters Jo, Meg, Amy and Beth are at home with their mother, a very outspoken women for her time. The story tells of how the sisters grow up, find love and find their place in the world.",
+            female_director: true
+)
+create_movie_joins(little_women, [drama, romance, adaptation, biography])
+
+little_women_2 = Movie.create(
+    title: "Little Women",
+    year: 2019,
+    length: 135,
+    director: "Greta Gerwig",
+    description: "In the years after the Civil War, Jo March (Saoirse Ronan) lives in New York City and makes her living as a writer, while her sister Amy March (Florence Pugh) studies painting in Paris. Amy has a chance encounter with Theodore 'Laurie' Laurence (Timothée Chalamet), a childhood crush who proposed to Jo, but was ultimately rejected. Their oldest sibling, Meg March (Emma Watson), is married to a schoolteacher, while shy sister Beth (Eliza Scanlen) develops a devastating illness that brings the family back together.",
+    female_director: true
+)
+create_movie_joins(little_women_2, [drama, romance, adaptation, biography])
+
+thelma_and_louise = Movie.create(
+            title: "Thelma and Louise",
+            year: 1991,
+            length: 130,
+            director: "Ridley Scott",
+            description: "Louise is working in a diner as a waitress and has some problems with her boyfriend Jimmy, who, as a musician, is always on the road. Thelma is married to Darryl who likes his wife to stay quiet in the kitchen so that he can watch football on TV. One day they decide to break out of their normal life and jump in the car and hit the road. Their journey, however, turns into a flight when Louise kills a man who threatens to rape Thelma. They decide to go to Mexico, but soon they are hunted by American police.",
+            female_director: false
+)
+create_movie_joins(thelma_and_louise, [crime, adventure, drama])
+
+alien = Movie.create(
+            title: "Alien",
+            year: 1979,
+            length: 117,  
+            director: "Ridley Scott",
+            description: "Groundbreaking for 1979 science fiction, Sigourney Weaver’s Ellen Ripley is one of the genre’s most iconic female characters. She’s not a damsel—she’s a badass final girl and the only survivor to defeat the monster that mutilated and destroyed every other member of the Nostromo crew.",
+            female_director: false
+)
+create_movie_joins(alien, [horror, sci_fi])
+
+mad_max = Movie.create(
+            title: "Mad Max Fury Road",
+            year: 2015,
+            length: 140,
+            director: "George Miller",
+            description: "Unearthing feminism in a scorched, hell-on-wheels action flick from road warrior franchise man George Miller isn’t exactly obvious. But though it’s titled after a male character, he is muzzled for much of the film, lending the action to a female imperator and her feminist revolt against the horrors of sexism.",
+            female_director: false
+)
+create_movie_joins(mad_max, [action, adventure, thriller, sci_fi])
+
+mustang = Movie.create(
+            title: "Mustang",
+            year: 2015,
+            length: 100,
+            director: "Deniz Gamze Ergüven",
+            description: "Early summer. In a village in northern Turkey, Lale and her four sisters are walking home from school, playing innocently with some boys. The immorality of their play sets off a scandal that has unexpected consequences. The family home is progressively transformed into a prison; instruction in homemaking replaces school and marriages start being arranged. The five sisters who share a common passion for freedom, find ways of getting around the constraints imposed on them.",
+            female_director: true
+)
+create_movie_joins(mustang, [drama])
+
+girlhood = Movie.create(
+            title: "Girlhood",
+            year: 2014,
+            length: 113,
+            director: "Céline Sciamma",
+            description: "Céline Sciamma’s Girlhood, a contemporary narrative with a classic plot that isn’t too distant from anything in the Jane Austen canon, follows a French teenager’s slog through gang life on a quest to self-discovery.",
+            female_director: true
+)
+create_movie_joins(girlhood, [drama])
+
+erin = Movie.create(
+            title: "Erin Brockovich",
+            year: 2000,
+            length: 113,
+            director: "Steven Soderbergh",
+            description: "Erin Brockovich-Ellis is an unemployed single mother, desperate to find a job, but is having no luck. This losing streak even extends to a failed lawsuit against a doctor in a car accident she was in. With no alternative, she successfully browbeats her lawyer to give her a job in compensation for the loss. While no one takes her seriously, with her trashy clothes and earthy manners, that soon changes when she begins to investigate a suspicious real estate case involving the Pacific Gas & Electric Company. What she discovers is that the company is trying quietly to buy land that was contaminated by hexavalent chromium, a deadly toxic waste that the company is improperly and illegally dumping and, in turn, poisoning the residents in the area. As she digs deeper, Erin finds herself leading point in a series of events that would involve her law firm in one of the biggest class action lawsuits in American history against a multi-billion dollar corporation.",
+            female_director: false
+)
+create_movie_joins(erin, [drama, biography])
+
+babadook = Movie.create(
+            title: "The Babadook",
+            year: 2014,
+            length: 95,
+            director: "Jennifer Kent",
+            description: "Amelia, who lost her husband in a car crash on the way to give birth to Samuel, their only child, struggles to cope with her fate as a single mom. Samuel's constant fear of monsters and violent reaction to overcome the fear doesn't help her cause either, which makes her friends become distant. When things can not get any worse, they read a strange book in their house about the 'Babadook' monster that hides in the dark areas of their house. Even Amelia seems to feel the effect of Babadook and desperately tries in vain to destroy the book. The nightmarish experiences the two encounter form the rest of the story.",
+            female_director: true
+)
+create_movie_joins(babadook, [horror, drama, thriller, mystery])
+
+####### CLIENTS ########
+puts "✨ creating clients... ✨"
+
+20.times do 
+    name = [
+        Faker::Movies::HitchhikersGuideToTheGalaxy.character, 
+        Faker::TvShows::TwinPeaks.character,
+        Faker::TvShows::TheFreshPrinceOfBelAir.character,
+        Faker::TvShows::RuPaul.queen,
+        Faker::JapaneseMedia::StudioGhibli.character,
+        Faker::BossaNova.artist
+    ].sample
+    puts name
+    Client.create(
+        name: name, 
+        address: Faker::Address.full_address
     )
 end
 
-## step 2: write a method that creates a joiner
-def create_joiners(person)
-    plants_number = rand(1..4)
-    plants_number.times do 
-        PlantParenthood.create(
-            plant_id: Plant.all.sample.id, 
-            person_id: person.id, 
-            affection: rand(101), 
-            favorite?: [true, false].sample
-        )
+####### DVDs ########
+puts "✨ creating dvds... ✨"
+
+20.times do 
+    random_movie_id = rand(1..Movie.all.count)
+    random_serial_number = 111 #to be updated
+    Dvd.create(movie_id: random_movie_id, serial_number: random_serial_number)
+end
+
+####### Rentals ########
+puts "✨ creating rentals... ✨"
+
+def find_dvd_id_for_rent
+    random_dvd_id = rand(1..Dvd.all.count)
+    dvd = Dvd.find(random_dvd_id)
+    return dvd.id if !dvd.rentals || dvd.rentals.select{|r| r.current}.empty?
+    find_dvd_id_for_rent
+end
+
+def random_client_id
+    random_client_id = rand(1..Client.all.count)
+    Client.find(random_client_id).id
+end
+
+20.times do
+    number_of_dvds_rented_at_once = rand(1..3)
+    client_id = random_client_id
+    dvd_id = find_dvd_id_for_rent
+    number_of_dvds_rented_at_once.times do
+        Rental.create(client_id: client_id, dvd_id: dvd_id)
     end
 end
 
-## step 3: invoke creating joiners by passing in an instance of a person
-10.times do     
-    create_joiners(create_person)
-    ##### ALTERNATIVE:
-    # person = create_person
-    # create_joiners(person)
-end
+# add some method that switches some rentals to past and overrides the created_at
 
 
-puts "🔥 🔥 🔥 🔥 "
+
+puts "📼 📼 📼 📼 SEEDED 📼 📼 📼 📼 "
