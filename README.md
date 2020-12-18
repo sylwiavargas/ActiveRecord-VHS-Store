@@ -22,17 +22,17 @@ You will be working on a six-model domain: `Client`, `Rental`, `Dvd`, `Movie`, `
 
 ## ERD
 
-**NOTE** that the below ERD does not include foreign keys -- these you need to add on your own, together with the accosiation macros.
+**NOTE** that the below ERD does not include foreign keys -- these you need to add on your own, together with the accosiation macros. 
 
 ```
-   Client 
+  Client 
     |
     ^
   Rental                  
     V
     |
     |
-   Dvd >---- Movie ----< MovieGenre >---- Genre
+  Dvd >---- Movie ----< MovieGenre >---- Genre
 ```
 
 ![Domain model](erd.png)
@@ -73,6 +73,7 @@ Build the following functionality:
 - `Client#return_one` - accepts an argument of a movie instance, finds the corresponding rental and updates the rental's `current` attribute from `true` to `false`
 - `Client#return_all`- updates `current` attribute from `true` to `false` on all client's rentals 
 - `Client.paid_most` - returns an instance who has spent most money at the store; one rental is $5,35 upfront (bonus: additional $12 charge for every late return — do not count those that have not yet been returned) 
+- `Client.total_watch_time` - returns an Integer of all movies watched by the all clients combined (assume that a rented movie is a watched movie)
 
 ### `Dvd`
 - `Dvd.most_used` - prints a list of 3 dvds that have been most rented in the format: "serial number: 1111111 | title: 'movie title'
@@ -91,6 +92,9 @@ Build the following functionality:
 
 ### `Genre`
 - `Genre.most_popular` - returns a list of 5 most popular genres based on number of movies
+- `Genre.longest_movies` - returns a genre whose movies length average is the highest
 
+### Non-model 
+- `shop_fun_statistics` - should print out information about the store: how many DVDs there are in total, how many clients, how many movies available at this store (not all Movies in the database are available), how many genres, how much time clients watched the movies in total, what genre is the most popular among the clients, etc.
 
 
