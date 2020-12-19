@@ -8,15 +8,15 @@ Welcome to your good old neighborhood VHS store. You will build an app that trac
 
 ## Associations
 
-You will be working on a six-model domain: `Client`, `Rental`, `Dvd`, `Movie`, `MovieGenre`, `Genre`. The associations are as follows:
+You will be working on a six-model domain: `Client`, `Rental`, `Vhs`, `Movie`, `MovieGenre`, `Genre`. The associations are as follows:
 - Genre has many movie_genres and movies through movie_genres,
 - MovieGenre belongs to a movie and a genre,
 - Movie has many movie_genres and genres through movie_genres,
-- Movie has many dvds and rentals through dvds,
-- Dvd belongs to a movie,
-- Dvd has many rentals and clients through rentals,
-- Rental belongs to a client and dvd,
-- Client has many rentals and dvds through rentals.
+- Movie has many vhss and rentals through vhss,
+- Vhs belongs to a movie,
+- Vhs has many rentals and clients through rentals,
+- Rental belongs to a client and vhs,
+- Client has many rentals and vhss through rentals.
 
 --- 
 
@@ -32,7 +32,7 @@ You will be working on a six-model domain: `Client`, `Rental`, `Dvd`, `Movie`, `
     V
     |
     |
-  Dvd >---- Movie ----< MovieGenre >---- Genre
+  Vhs >---- Movie ----< MovieGenre >---- Genre
 ```
 
 ![Domain model](erd.png)
@@ -52,7 +52,7 @@ You will be working on a six-model domain: `Client`, `Rental`, `Dvd`, `Movie`, `
 9. After you've chosen the deliverables, tackle one by one. Majority of them require helper methods, the use of `binding.pry`, and a good amount of pseudocoding. When writing helper methods, please remember that:
 - each method should do JUST ONE JOB,
 - each method name should be descriptive,
-- it's alway best think about where the method should live; for instance: is it a behavior of a Client? or is it a behavior of a Dvd instance and should be called from within an instance method of a Client?
+- it's alway best think about where the method should live; for instance: is it a behavior of a Client? or is it a behavior of a Vhs instance and should be called from within an instance method of a Client?
 
 **NOTE**: all deliverables will make you a strong dev and will allow you for a good practice on ActiveRecord. Please spend some time on this lab, together with your partner or on your own. This lab can also be developed into a CLI that can serve as a strong portfolio piece or blog post material.
 
@@ -69,17 +69,17 @@ Build the following functionality:
 ### `Client`
 - `Client.most_active` - returns a list of top 5 most active clients (i.e. those who had the most non-current / returned rentals)
 - `Client#favorite_genres` - lists three genres that the client rented the most
-- `Client.non_grata` - returns a list of all the clients who have a dvd past the due date (or, more difficult: who ever missed the return date)
+- `Client.non_grata` - returns a list of all the clients who have a vhs past the due date (or, more difficult: who ever missed the return date)
 - `Client#return_one` - accepts an argument of a movie instance, finds the corresponding rental and updates the rental's `current` attribute from `true` to `false`
 - `Client#return_all`- updates `current` attribute from `true` to `false` on all client's rentals 
 - `Client.paid_most` - returns an instance who has spent most money at the store; one rental is $5,35 upfront (bonus: additional $12 charge for every late return — do not count those that have not yet been returned) 
 - `Client.total_watch_time` - returns an Integer of all movies watched by the all clients combined (assume that a rented movie is a watched movie)
 
-### `Dvd`
-- `Dvd.most_used` - prints a list of 3 dvds that have been most rented in the format: "serial number: 1111111 | title: 'movie title'
-- `Dvd.all_genres` - returns a list of all genres available at the store
-- `Dvd.available_now` - returns a list of all dvds currently available at the store
-- `Dvd.hot_from_the_press` - accepts arguments used to create a new instance of a `Movie` and a name of a genre; creates the movie, associates it with appropriate genre and creates three instances of a `Dvd` associated with that Movie
+### `Vhs`
+- `Vhs.most_used` - prints a list of 3 vhss that have been most rented in the format: "serial number: 1111111 | title: 'movie title'
+- `Vhs.all_genres` - returns a list of all genres available at the store
+- `Vhs.available_now` - returns a list of all vhss currently available at the store
+- `Vhs.hot_from_the_press` - accepts arguments used to create a new instance of a `Movie` and a name of a genre; creates the movie, associates it with appropriate genre and creates three instances of a `Vhs` associated with that Movie
 
 ### `Movie`
 - `Movie.most_clients` - returns a list of TOP3 All Time favorites based on number of different clients who watched it 
@@ -88,13 +88,13 @@ Build the following functionality:
 - `Movie.longest` - returns a list of the movies from the longest to the shortest
 - `Movie#recommendation` - prints a recommendation that includes a random emoji, the movie description, its length, director and year of release
 - `Movie.surprise_me` - prints a recommendation for a random movie
-- `Movie#report_stolen` - deletes a random dvd instance associated with this movie that's currently not rented out and prints information: "THANK YOU FOR YOUR REPORT. WE WILL LAUNCH AN INVESTIGATION."
+- `Movie#report_stolen` - deletes a random vhs instance associated with this movie that's currently not rented out and prints information: "THANK YOU FOR YOUR REPORT. WE WILL LAUNCH AN INVESTIGATION."
 
 ### `Genre`
 - `Genre.most_popular` - returns a list of 5 most popular genres based on number of movies
 - `Genre.longest_movies` - returns a genre whose movies length average is the highest
 
 ### Non-model 
-- `shop_fun_statistics` - should print out information about the store: how many DVDs there are in total, how many clients, how many movies available at this store (not all Movies in the database are available), how many genres, how much time clients watched the movies in total, what genre is the most popular among the clients, etc.
+- `shop_fun_statistics` - should print out information about the store: how many VHSs there are in total, how many clients, how many movies available at this store (not all Movies in the database are available), how many genres, how much time clients watched the movies in total, what genre is the most popular among the clients, etc.
 
 

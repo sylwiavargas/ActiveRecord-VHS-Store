@@ -1,12 +1,12 @@
 MovieGenre.destroy_all
 Rental.destroy_all
-Dvd.destroy_all
+Vhs.destroy_all
 Client.destroy_all
 Genre.destroy_all
 Movie.destroy_all
 MovieGenre.reset_pk_sequence
 Rental.reset_pk_sequence
-Dvd.reset_pk_sequence
+Vhs.reset_pk_sequence
 Client.reset_pk_sequence
 Genre.reset_pk_sequence
 Movie.reset_pk_sequence
@@ -82,7 +82,7 @@ perspepolis = Movie.create(
             description: "In 1970s Iran, Marjane 'Marji' Satrapi watches events through her young eyes and her idealistic family of a long dream being fulfilled of the hated Shah's defeat in the Iranian Revolution of 1979. However as Marji grows up, she witnesses first hand how the new Iran, now ruled by Islamic fundamentalists, has become a repressive tyranny on its own. With Marji dangerously refusing to remain silent at this injustice, her parents send her abroad to Vienna to study for a better life. However, this change proves an equally difficult trial with the young woman finding herself in a different culture loaded with abrasive characters and profound disappointments that deeply trouble her. Even when she returns home, Marji finds that both she and homeland have changed too much and the young woman and her loving family must decide where she truly belongs.",
             female_director: true
 )
-create_movie_joins(persepolis, [animation, war, adaptation, history, biography])
+create_movie_joins(perspepolis, [animation, war, adaptation, history, biography])
 
 little_women = Movie.create(
             title: "Little Women",
@@ -183,33 +183,32 @@ puts "✨ creating clients... ✨"
         Faker::TvShows::TwinPeaks.character,
         Faker::TvShows::TheFreshPrinceOfBelAir.character,
         Faker::TvShows::RuPaul.queen,
-        Faker::JapaneseMedia::StudioGhibli.character,
         Faker::BossaNova.artist
     ].sample
-    puts name
+    puts "🍿 #{name}, welcome to our sick vhs store!"
     Client.create(
         name: name, 
-        address: Faker::Address.full_address
+        home_address: Faker::Address.full_address
     )
 end
 
-####### DVDs ########
-puts "✨ creating dvds... ✨"
+####### VHS ########
+puts "✨ creating vhs... ✨"
 
-20.times do 
+60.times do 
     random_movie_id = rand(1..Movie.all.count)
     random_serial_number = 111 #to be updated
-    Dvd.create(movie_id: random_movie_id, serial_number: random_serial_number)
+    Vhs.create(movie_id: random_movie_id, serial_number: random_serial_number)
 end
 
 ####### Rentals ########
 puts "✨ creating rentals... ✨"
 
-def find_dvd_id_for_rent
-    random_dvd_id = rand(1..Dvd.all.count)
-    dvd = Dvd.find(random_dvd_id)
-    return dvd.id if !dvd.rentals || dvd.rentals.select{|r| r.current}.empty?
-    find_dvd_id_for_rent
+def find_vhs_id_for_rent
+    random_vhs_id = rand(1..Vhs.all.count)
+    vhs = Vhs.find(random_vhs_id)
+    return vhs.id if !vhs.rentals || vhs.rentals.select{|r| r.current}.empty?
+    find_vhs_id_for_rent
 end
 
 def random_client_id
@@ -217,17 +216,38 @@ def random_client_id
     Client.find(random_client_id).id
 end
 
+# create rentals (min 20, max 60)
 20.times do
-    number_of_dvds_rented_at_once = rand(1..3)
+    number_of_vhs_rented_at_once = rand(1..3)
     client_id = random_client_id
-    dvd_id = find_dvd_id_for_rent
-    number_of_dvds_rented_at_once.times do
-        Rental.create(client_id: client_id, dvd_id: dvd_id)
+    vhs_id = find_vhs_id_for_rent
+    number_of_vhs_rented_at_once.times do
+        Rental.create(client_id: client_id, vhs_id: vhs_id, current: true)
     end
 end
 
-# add some method that switches some rentals to past and overrides the created_at
+returned_on_date_number = (Rental.count * 0.55).ceil
+returned_late_number = (Rental.count * 0.25).ceil
 
+index = 1
+
+# make some of the rentals be returned on time
+returned_on_date_number.times do
+    rented_date = Faker::Date.between(from: '2014-09-01', to: '2014-09-03')
+    returned_date = Faker::Date.between(from: '2014-09-05', to: '2014-09-08')
+    rental = Rental.find(index)
+    rental.update(current: false,  created_at: rented_date, updated_at: returned_date)
+    index += 1
+end
+
+# make some of the rentals be returned late
+returned_late_number.times do
+    rented_date = Faker::Date.between(from: '2010-01-01', to: '2015-06-01')
+    returned_date = Faker::Date.between(from: '2015-06-15', to: 2.days.ago)
+    rental = Rental.find(index)
+    index += 1
+    rental.update(current: false,  created_at: rented_date, updated_at: returned_date)
+end
 
 
 puts "📼 📼 📼 📼 SEEDED 📼 📼 📼 📼 "
