@@ -12,11 +12,11 @@ You will be working on a six-model domain: `Client`, `Rental`, `Vhs`, `Movie`, `
 - Genre has many movie_genres and movies through movie_genres,
 - MovieGenre belongs to a movie and a genre,
 - Movie has many movie_genres and genres through movie_genres,
-- Movie has many vhss and rentals through vhss,
+- Movie has many vhs and rentals through vhs,
 - Vhs belongs to a movie,
 - Vhs has many rentals and clients through rentals,
 - Rental belongs to a client and vhs,
-- Client has many rentals and vhss through rentals.
+- Client has many rentals and vhs through rentals.
 
 --- 
 
@@ -76,9 +76,9 @@ Build the following functionality:
 - `Client.total_watch_time` - returns an Integer of all movies watched by the all clients combined (assume that a rented movie is a watched movie)
 
 ### `Vhs`
-- `Vhs.most_used` - prints a list of 3 vhss that have been most rented in the format: "serial number: 1111111 | title: 'movie title'
+- `Vhs.most_used` - prints a list of 3 vhs that have been most rented in the format: "serial number: 1111111 | title: 'movie title'
 - `Vhs.all_genres` - returns a list of all genres available at the store
-- `Vhs.available_now` - returns a list of all vhss currently available at the store
+- `Vhs.available_now` - returns a list of all vhs currently available at the store
 - `Vhs.hot_from_the_press` - accepts arguments used to create a new instance of a `Movie` and a name of a genre; creates the movie, associates it with appropriate genre and creates three instances of a `Vhs` associated with that Movie
 
 ### `Movie`
@@ -95,6 +95,6 @@ Build the following functionality:
 - `Genre.longest_movies` - returns a genre whose movies length average is the highest
 
 ### Non-model 
-- `shop_fun_statistics` - should print out information about the store: how many VHSs there are in total, how many clients, how many movies available at this store (not all Movies in the database are available), how many genres, how much time clients watched the movies in total, what genre is the most popular among the clients, etc.
+- `shop_fun_statistics` - should print out information about the store: how many Vhs there are in total, how many clients, how many movies available at this store (not all Movies in the database are available), how many genres, how much time clients watched the movies in total, what genre is the most popular among the clients, etc.
 
 
