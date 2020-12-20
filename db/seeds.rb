@@ -197,7 +197,6 @@ puts "✨ creating vhs... ✨"
 
 60.times do 
     random_movie_id = rand(1..Movie.all.count)
-    puts "⭐️ random_movie_id: #{random_movie_id}"
     Vhs.create(movie_id: random_movie_id)
 end
 
