@@ -64,13 +64,13 @@ Build the following functionality:
 
 ### `Rental`
 - `Rental#due_date` - returns a date one week from when the record was created
-- `Rental.past_due_date` - returns a list of all the rentals past due date
+- `Rental.past_due_date` - returns a list of all the rentals past due date, currently rented or rented in the past
 
 ### `Client`
 - `Client.most_active` - returns a list of top 5 most active clients (i.e. those who had the most non-current / returned rentals)
-- `Client#favorite_genres` - lists three genres that the client rented the most
+- `Client#favorite_genres` - lists the names of three genres that the client rented the most
 - `Client.non_grata` - returns a list of all the clients who have a vhs past the due date (or, more difficult: who ever missed the return date)
-- `Client#return_one` - accepts an argument of a movie instance, finds the corresponding rental and updates the rental's `current` attribute from `true` to `false`
+- `Client#return_one` - accepts an argument of an vhs instance, finds the corresponding rental and updates the rental's `current` attribute from `true` to `false`
 - `Client#return_all`- updates `current` attribute from `true` to `false` on all client's rentals 
 - `Client.paid_most` - returns an instance who has spent most money at the store; one rental is $5,35 upfront (bonus: additional $12 charge for every late return — do not count those that have not yet been returned) 
 - `Client.total_watch_time` - returns an Integer of all movies watched by the all clients combined (assume that a rented movie is a watched movie)
@@ -79,7 +79,7 @@ Build the following functionality:
 - `Vhs.most_used` - prints a list of 3 vhs that have been most rented in the format: "serial number: 1111111 | title: 'movie title'
 - `Vhs.all_genres` - returns a list of all genres available at the store
 - `Vhs.available_now` - returns a list of all vhs currently available at the store
-- `Vhs.hot_from_the_press` - accepts arguments used to create a new instance of a `Movie` and a name of a genre; creates the movie, associates it with appropriate genre and creates three instances of a `Vhs` associated with that Movie
+- `Vhs.hot_from_the_press` - accepts arguments used to create a new instance of a `Movie` and a name of a genre; creates the movie, associates it with appropriate genre (if it exists, if it doesn't - creates one) and creates three instances of a `Vhs` associated with that Movie
 
 ### `Movie`
 - `Movie.most_clients` - returns a list of TOP3 All Time favorites based on number of different clients who watched it 
