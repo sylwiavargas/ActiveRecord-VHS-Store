@@ -46,10 +46,21 @@ You will be working on a six-model domain: `Client`, `Rental`, `Vhs`, `Movie`, `
 3. Run `bundle`.
 4. Check the code you have been given: see `app/models` and files in it (is there a class for every model? are all the associations set up?), see `db/schema`, see `rb/seeds.rb`. Run `rake db:migrate:status` to see if there are any pending migrations -- if there are, check these files and see if you need to add anything before migrating it.
 5. Now that you know what is missing, DO NOT CODE JUST YET. Discuss with your partner the plan for the setup: what are you going to do step by step and how are you going to test if it worked. 
-6. Run `rake -T` and see what process reminder tasks are available to you (they are marked with "🎁").
-7. Start coding the setup. Test your code frequently.
-8. After all your models are hooked up correctly, choose **minimum** five deliverables from the list below. You need to have at least one deliverable for each of the CRUD actions. The only compulsory deliverable is `Client.paid_most` (it's a read action). 
-9. After you've chosen the deliverables, tackle one by one. Majority of them require helper methods, the use of `binding.pry`, and a good amount of pseudocoding. When writing helper methods, please remember that:
+6. You must have noticed that one of the models is called `Vhs`. In `rake console` run:
+```ruby
+'vhs'.pluralize
+'vhs'.singularize
+```
+As you see, ActiveRecord perceives this word as already pluralized and it will pose problems when you're trying to apply `.vhs` method on e.g. a `Movie` instance (AR will look for a singularized model of `Vh`). To prevent this, let's tell AR that this word is the same singular as plural -- paste this in `config/environment.rb`:
+```ruby
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.irregular 'vhs', 'vhs'
+end
+```
+7. Run `rake -T` and see what process reminder tasks are available to you (they are marked with "🎁").
+8. Start coding the setup. Test your code frequently.
+9. After all your models are hooked up correctly, choose **minimum** five deliverables from the list below. You need to have at least one deliverable for each of the CRUD actions. The only compulsory deliverable is `Client.paid_most` (it's a read action). 
+10. After you've chosen the deliverables, tackle one by one. Majority of them require helper methods, the use of `binding.pry`, and a good amount of pseudocoding. When writing helper methods, please remember that:
 - each method should do JUST ONE JOB,
 - each method name should be descriptive,
 - it's alway best think about where the method should live; for instance: is it a behavior of a Client? or is it a behavior of a Vhs instance and should be called from within an instance method of a Client?
@@ -68,7 +79,7 @@ Build the following functionality:
 
 ### `Client`
 - `Client.most_active` - returns a list of top 5 most active clients (i.e. those who had the most non-current / returned rentals)
-- `Client#favorite_genres` - lists the names of three genres that the client rented the most
+- `Client#favorite_genre` - `puts` the name of the genre that the client rented the most; in counting how many times a person watched a genre, you can treat two rentals of the same movie as two separate instances;
 - `Client.non_grata` - returns a list of all the clients who have a vhs past the due date (or, more difficult: who ever missed the return date)
 - `Client#return_one` - accepts an argument of an vhs instance, finds the corresponding rental and updates the rental's `current` attribute from `true` to `false`
 - `Client#return_all`- updates `current` attribute from `true` to `false` on all client's rentals 
@@ -82,19 +93,15 @@ Build the following functionality:
 - `Vhs.hot_from_the_press` - accepts arguments used to create a new instance of a `Movie` and a name of a genre; creates the movie, associates it with appropriate genre (if it exists, if it doesn't - creates one) and creates three instances of a `Vhs` associated with that Movie
 
 ### `Movie`
-- `Movie.most_clients` - returns a list of TOP3 All Time favorites based on number of different clients who watched it 
+- `Movie.available_now` - returns a list of all movies currently available at the store
+- `Movie.most_clients` - returns an instance of `Movie` that has been rentes by the most people
 - `Movie.most_rentals` - returns a list of TOP3 All Time favorites based on number of rentals
 - `Movie.newest_first` - returns a list of all the movies from the most recent ones to the oldies but goldies based on the release year
 - `Movie.longest` - returns a list of the movies from the longest to the shortest
-- `Movie#recommendation` - prints a recommendation that includes a random emoji, the movie description, its length, director and year of release
+- `Movie#recommendation` - prints a recommendation that includes a random emoji next to the title, and in new lines: the movie description, its length, director and year of release
 - `Movie.surprise_me` - prints a recommendation for a random movie
 - `Movie#report_stolen` - deletes a random vhs instance associated with this movie that's currently not rented out and prints information: "THANK YOU FOR YOUR REPORT. WE WILL LAUNCH AN INVESTIGATION."
 
 ### `Genre`
 - `Genre.most_popular` - returns a list of 5 most popular genres based on number of movies
-- `Genre.longest_movies` - returns a genre whose movies length average is the highest
-
-### Non-model 
-- `shop_fun_statistics` - should print out information about the store: how many Vhs there are in total, how many clients, how many movies available at this store (not all Movies in the database are available), how many genres, how much time clients watched the movies in total, what genre is the most popular among the clients, etc.
-
-
+- `Genre.longest_movies` - returns a genre whose movies length average is the highest (remember to also test it with an instance of a Genre that does not have any movies associated)

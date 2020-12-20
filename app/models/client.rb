@@ -12,8 +12,31 @@ class Client < ActiveRecord::Base
         self.all.sort_by{|client| client.past_rentals.count}.reverse[0..4]
     end
 
-    def favorite_genres
-        # ?
+    def movies
+        self.vhs.map(&:movie)
+    end
+
+    def genres
+        genres = movies.map(&:genres).flatten
+    end
+
+    def favorite_genre_hash
+        genre_hash = {}
+        genres.each do |genre|
+            key = genre.name
+            if genre_hash[key]
+                genre_hash[key]["count"] += 1 
+            else 
+                genre_hash[key] = {}
+                genre_hash[key]["genre"] = genre
+                genre_hash[key]["count"] = 1
+            end
+        end
+        genre_hash
+    end
+
+    def favorite_genre        
+        favorite_genre_hash.max_by(&:count)[1]
     end
 
     def self.non_grata

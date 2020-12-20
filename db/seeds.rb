@@ -197,8 +197,8 @@ puts "✨ creating vhs... ✨"
 
 60.times do 
     random_movie_id = rand(1..Movie.all.count)
-    random_serial_number = 111 #to be updated
-    Vhs.create(movie_id: random_movie_id, serial_number: random_serial_number)
+    puts "⭐️ random_movie_id: #{random_movie_id}"
+    Vhs.create(movie_id: random_movie_id)
 end
 
 ####### Rentals ########

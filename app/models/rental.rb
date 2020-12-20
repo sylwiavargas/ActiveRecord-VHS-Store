@@ -6,8 +6,8 @@ class Rental < ActiveRecord::Base
         self.created_at + 7.days
     end
 
-    def self.past_rentals_currently_available_movies
-        self.all.select{|rental| !rental.current}.map(&:vhs).map(&:movie).to_set
+    def self.past_rentals_currently_available_vhs
+        self.all.select{|rental| !rental.current}.map(&:vhs)
     end
 
     def past_due_date?

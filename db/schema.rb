@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_12_18_235748) do
   end
 
   create_table "vhs", force: :cascade do |t|
-    t.integer "serial_number"
+    t.string "serial_number"
     t.integer "movie_id"
   end
 
