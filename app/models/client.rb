@@ -15,8 +15,6 @@ class Client < ActiveRecord::Base
     end
 
     def self.most_active
-        # 1. get the number of past rentals
-        # 3. iterate over that array to get the five most active ones
         self.all.sort_by{|client| client.past_rentals.count}.reverse[0..4]
     end
 
