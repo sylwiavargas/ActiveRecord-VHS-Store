@@ -22,7 +22,7 @@ You will be working on a six-model domain: `Client`, `Rental`, `Vhs`, `Movie`, `
 
 ## ERD
 
-**NOTE** that the below ERD does not include foreign keys -- these you need to add on your own, together with the accosiation macros. 
+**NOTE** that the below ERD does not include foreign keys -- these you need to add on your own, together with the association macros. 
 
 ```
   Client 
