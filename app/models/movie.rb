@@ -13,6 +13,14 @@ class Movie < ActiveRecord::Base
         self.vhs.sum{|vhs| vhs.rentals.count}
     end
 
+    def self.by_female_director
+        self.select{|movie| movie.female_director}
+    end
+
+    def self.most_popular_female_director
+        self.by_female_director.max_by{|movie| movie.number_of_rentals}.director
+    end
+
     def self.most_rentals
         self.all.sort_by{|movie| movie.number_of_rentals}[0..2]
     end

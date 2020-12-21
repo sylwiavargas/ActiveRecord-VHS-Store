@@ -67,6 +67,9 @@ end
 
 **NOTE**: all deliverables will make you a strong dev and will allow you for a good practice on ActiveRecord. Please spend some time on this lab, together with your partner or on your own. This lab can also be developed into a CLI that can serve as a strong portfolio piece or blog post material.
 
+
+**2nd NOTE**: the `seed`s rely on a significant amount of randomness so if you work with another person and do not share the same database, you WILL get different results in terms of number of associated instances or number of instances in general.
+
 --- 
 
 ## Functionality
@@ -114,6 +117,7 @@ Build the following functionality:
 - `Movie.available_now` - returns a list of all movies currently available at the store
 - `Movie.most_clients` ⭐️ - returns an instance of `Movie` that has been rentes by the most people
 - `Movie.most_rentals` - returns a list of TOP3 All Time favorites based on number of rentals
+- `Movie.most_popular_female_director` - returns a string that's a name of a director of the movie made by a female director with most `Rental`s
 - `Movie.newest_first` - returns a list of all the movies from the most recent ones to the oldies but goldies based on the release year
 - `Movie.longest` - returns a list of the movies from the longest to the shortest
 - `Movie#recommendation` - prints a recommendation that includes a random emoji next to the title, and in new lines: the movie description, its length, director and year of release
