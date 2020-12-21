@@ -74,25 +74,35 @@ end
 Build the following functionality:
 
 ### `Rental`
+**READ**
 - `Rental#due_date` - returns a date one week from when the record was created
 - `Rental.past_due_date` - returns a list of all the rentals past due date, currently rented or rented in the past
 
 ### `Client`
+**CREATE**
+- `Client.first_rental` - accepts and instance of arguments needed to create a new `Client` instance and a currently available `Vhs` instance (or, more difficult: a `Movie` instance or just a `Movie` title and on that basis chooses a currently available vhs); it creates a new `Client` instance and a new `Rental` instance with `current` set to true.
+**READ**
 - `Client.most_active` - returns a list of top 5 most active clients (i.e. those who had the most non-current / returned rentals)
 - `Client#favorite_genre` - `puts` the name of the genre that the client rented the most; in counting how many times a person watched a genre, you can treat two rentals of the same movie as two separate instances;
 - `Client.non_grata` - returns a list of all the clients who have a vhs past the due date (or, more difficult: who ever missed the return date)
-- `Client#return_one` - accepts an argument of an vhs instance, finds the corresponding rental and updates the rental's `current` attribute from `true` to `false`
-- `Client#return_all`- updates `current` attribute from `true` to `false` on all client's rentals 
 - `Client.paid_most` - returns an instance who has spent most money at the store; one rental is $5,35 upfront (bonus: additional $12 charge for every late return — do not count those that have not yet been returned) 
 - `Client.total_watch_time` - returns an Integer of all movies watched by the all clients combined (assume that a rented movie is a watched movie)
+**UPDTE**
+- `Client#return_one` - accepts an argument of an vhs instance, finds the corresponding rental and updates the rental's `current` attribute from `true` to `false`
+- `Client#return_all`- updates `current` attribute from `true` to `false` on all client's rentals 
+**UPDATE AND DELETE**
+- `Client#last_return` - updates all Client' rentals current to `false` and deletes the Client from the database
 
 ### `Vhs`
+**CREATE**
+- `Vhs.hot_from_the_press` - accepts arguments used to create a new instance of a `Movie` and a name of a genre; creates the movie, associates it with appropriate genre (if it exists, if it doesn't - creates one) and creates three instances of a `Vhs` associated with that Movie
+**READ**
 - `Vhs.most_used` - prints a list of 3 vhs that have been most rented in the format: "serial number: 1111111 | title: 'movie title'
 - `Vhs.all_genres` - returns a list of all genres available at the store
 - `Vhs.available_now` - returns a list of all vhs currently available at the store
-- `Vhs.hot_from_the_press` - accepts arguments used to create a new instance of a `Movie` and a name of a genre; creates the movie, associates it with appropriate genre (if it exists, if it doesn't - creates one) and creates three instances of a `Vhs` associated with that Movie
 
 ### `Movie`
+**READ**
 - `Movie.available_now` - returns a list of all movies currently available at the store
 - `Movie.most_clients` - returns an instance of `Movie` that has been rentes by the most people
 - `Movie.most_rentals` - returns a list of TOP3 All Time favorites based on number of rentals
@@ -100,8 +110,10 @@ Build the following functionality:
 - `Movie.longest` - returns a list of the movies from the longest to the shortest
 - `Movie#recommendation` - prints a recommendation that includes a random emoji next to the title, and in new lines: the movie description, its length, director and year of release
 - `Movie.surprise_me` - prints a recommendation for a random movie
+**DELETE**
 - `Movie#report_stolen` - deletes a random vhs instance associated with this movie that's currently not rented out and prints information: "THANK YOU FOR YOUR REPORT. WE WILL LAUNCH AN INVESTIGATION."
 
 ### `Genre`
+**READ**
 - `Genre.most_popular` - returns a list of 5 most popular genres based on number of movies
 - `Genre.longest_movies` - returns a genre whose movies length average is the highest (remember to also test it with an instance of a Genre that does not have any movies associated)

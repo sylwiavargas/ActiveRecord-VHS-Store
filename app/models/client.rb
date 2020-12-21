@@ -2,6 +2,14 @@ class Client < ActiveRecord::Base
     has_many :rentals
     has_many :vhs, through: :rentals
 
+    def self.first_rental(client_hash, movie_title)
+        new_client = Client.create(client_hash)
+        puts "🍿 Welcome, #{new_client.name}!"
+        movie = Movie.find_by(title: movie_title)
+        vhs = Vhs.available_now.find{|vhs| vhs.movie_id == movie.id}
+        Rental.create(client_id: new_client.id, vhs_id: vhs.id, current: true)
+    end
+
     def past_rentals
         self.rentals.select{|rental| !rental.current}
     end
@@ -81,5 +89,11 @@ class Client < ActiveRecord::Base
 
     def self.total_watch_time
         self.all.sum{|client| client.total_watch_time}
+    end
+
+    def last_return
+        self.rentals.update_all(current: false)
+        self.destroy
+        puts "Goodbye, #{self.name}!"
     end
 end
