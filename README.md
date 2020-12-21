@@ -45,6 +45,9 @@ You will be working on a six-model domain: `Client`, `Rental`, `Vhs`, `Movie`, `
 2. Fork and clone this lab.
 3. Run `bundle`.
 4. Check the code you have been given: see `app/models` and files in it (is there a class for every model? are all the associations set up?), see `db/schema`, see `rb/seeds.rb`. Run `rake db:migrate:status` to see if there are any pending migrations -- if there are, check these files and see if you need to add anything before migrating it.
+
+**NOTE ABOUT THE SEEDS**: the `seed`s have been commented out -- uncomment it once you've built out your migrations and associations. It is advisable that you create the migrations in the order that `destroy_all` follow in the `seed`s file. Also, as you can see in the file, `seed`s rely on a significant amount of randomness so if you work with another person and do not share the same database, you WILL get different results in terms of number of associated instances or number of instances in general.
+
 5. Now that you know what is missing, DO NOT CODE JUST YET. Discuss with your partner the plan for the setup: what are you going to do step by step and how are you going to test if it worked. 
 6. You must have noticed that one of the models is called `Vhs`. In `rake console` run:
 ```ruby
@@ -66,8 +69,6 @@ end
 - it's always best think about where the method should live; for instance: is it a behavior of a Client? or is it a behavior of a Vhs instance and should be called from within an instance method of a Client?
 
 **NOTE**: all deliverables will make you a strong dev and will allow you for a good practice on ActiveRecord. Please spend some time on this lab, together with your partner or on your own. This lab can also be developed into a CLI that can serve as a strong portfolio piece or blog post material.
-
-**NOTE ABOUT THE SEEDS**: the `seed`s have been commented out -- uncomment it once you've built out your migrations and associations. It is advisable that you create the migrations in the order that `destroy_all` follow in the `seed`s file. Also, as you can see in the file, `seed`s rely on a significant amount of randomness so if you work with another person and do not share the same database, you WILL get different results in terms of number of associated instances or number of instances in general.
 
 --- 
 
