@@ -67,8 +67,7 @@ end
 
 **NOTE**: all deliverables will make you a strong dev and will allow you for a good practice on ActiveRecord. Please spend some time on this lab, together with your partner or on your own. This lab can also be developed into a CLI that can serve as a strong portfolio piece or blog post material.
 
-
-**2nd NOTE**: the `seed`s rely on a significant amount of randomness so if you work with another person and do not share the same database, you WILL get different results in terms of number of associated instances or number of instances in general.
+**NOTE ABOUT THE SEEDS**: the `seed`s have been commented out -- uncomment it once you've built out your migrations and associations. It is advisable that you create the migrations in the order that `destroy_all` follow in the `seed`s file. Also, as you can see in the file, `seed`s rely on a significant amount of randomness so if you work with another person and do not share the same database, you WILL get different results in terms of number of associated instances or number of instances in general.
 
 --- 
 

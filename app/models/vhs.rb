@@ -1,9 +1,7 @@
 class Vhs < ActiveRecord::Base
-    belongs_to :movie
-    has_many :rentals
-    has_many :clients, through: :rentals
     after_initialize :add_serial_number
 
+    # generates serial number based on the title
     def add_serial_number
         serial_number = serial_number_stub
         alphanumerics = (0...36).map{ |i| i.to_s 36 }
@@ -12,8 +10,6 @@ class Vhs < ActiveRecord::Base
     end
 
     private
-
-    # these methods generate a serial number
 
     def long_title?
         !self.movie.title.nil? && self.movie.title.length > 2
