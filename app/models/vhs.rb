@@ -41,6 +41,7 @@ class Vhs < ActiveRecord::Base
 
     def add_serial_number
         serial_number = serial_number_stub
+        # Converting to Base 36 can be useful when you want to generate random combinations of letters and numbers, since it counts using every number from 0 to 9 and then every letter from a to z. Read more about base 36 here: https://en.wikipedia.org/wiki/Senary#Base_36_as_senary_compression
         alphanumerics = (0...36).map{ |i| i.to_s 36 }
         13.times{|t| serial_number << alphanumerics.sample}
         self.update(serial_number: serial_number)
