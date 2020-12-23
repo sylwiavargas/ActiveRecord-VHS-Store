@@ -50,11 +50,11 @@ class Vhs < ActiveRecord::Base
     private
 
     def long_title?
-        !self.movie.title.nil? && self.movie.title.length > 2
+        self.movie.title && self.movie.title.length > 2
     end
 
     def two_part_title?
-        !self.movie.title.split(" ")[1].nil? && self.movie.title.split(" ")[1].length > 2
+        self.movie.title.split(" ")[1] && self.movie.title.split(" ")[1].length > 2
     end
 
     def serial_number_stub
