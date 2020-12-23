@@ -38,6 +38,7 @@ class Vhs < ActiveRecord::Base
         3.times{Vhs.create(movie_id: movie_object.id)}
     end
 
+    private
 
     def add_serial_number
         serial_number = serial_number_stub
@@ -46,8 +47,6 @@ class Vhs < ActiveRecord::Base
         13.times{|t| serial_number << alphanumerics.sample}
         self.update(serial_number: serial_number)
     end
-
-    private
 
     def long_title?
         self.movie.title && self.movie.title.length > 2
