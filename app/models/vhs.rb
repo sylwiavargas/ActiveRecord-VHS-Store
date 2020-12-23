@@ -1,6 +1,9 @@
 class Vhs < ActiveRecord::Base
     after_initialize :add_serial_number
 
+
+    private
+
     # generates serial number based on the title
     def add_serial_number
         serial_number = serial_number_stub
@@ -10,14 +13,12 @@ class Vhs < ActiveRecord::Base
         self.update(serial_number: serial_number)
     end
 
-    private
-
     def long_title?
-        !self.movie.title.nil? && self.movie.title.length > 2
+        self.movie.title && self.movie.title.length > 2
     end
 
     def two_part_title?
-        !self.movie.title.split(" ")[1].nil? && self.movie.title.split(" ")[1].length > 2
+        self.movie.title.split(" ")[1] && self.movie.title.split(" ")[1].length > 2
     end
 
     def serial_number_stub
