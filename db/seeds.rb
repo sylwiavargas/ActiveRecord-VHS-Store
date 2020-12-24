@@ -232,7 +232,6 @@ puts "✨ creating rentals... ✨"
 #     vhs_copies[rental.vhs.id].nil? ? vhs_copies[rental.vhs.id] = 1 : vhs_copies[rental.vhs.id] += 1 
 # end
 
-# vhs_id_rentals = Rental.count_by_vhs_id
 # #Get array of duplicated VHS ids
 
 # duplicate_vhs_ids = vhs_id_rentals.select {|vhs_id, count| count > 1}.keys
