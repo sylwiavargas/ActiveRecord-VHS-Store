@@ -224,29 +224,60 @@ puts "✨ creating rentals... ✨"
 #         Rental.create(client_id: client_id, vhs_id: vhs_id, current: true)
 #     end
 # end
+#########################    Attempted Fix      #########################
 
-# returned_on_date_number = (Rental.count * 0.55).ceil
-# returned_late_number = (Rental.count * 0.25).ceil
+## Count number of times each VHS is rented
+# vhs_copies = {}
+# Rental.all.each do |rental| 
+#     vhs_copies[rental.vhs.id].nil? ? vhs_copies[rental.vhs.id] = 1 : vhs_copies[rental.vhs.id] += 1 
+# end
 
-# index = 1
+# vhs_id_rentals = Rental.count_by_vhs_id
+# #Get array of duplicated VHS ids
 
-# # make some of the rentals be returned on time
-# returned_on_date_number.times do
-#     rented_date = Faker::Date.between(from: '2014-09-01', to: '2014-09-03')
-#     returned_date = Faker::Date.between(from: '2014-09-05', to: '2014-09-08')
-#     rental = Rental.find(index)
+# duplicate_vhs_ids = vhs_id_rentals.select {|vhs_id, count| count > 1}.keys
+
+# # sets all rentals for duplicated ids to returned EXCEPT for the most recent rental
+# duplicate_vhs_ids.each do |vhs_id|
+# this_ids_rentals = Rental.where(vhs_id: vhs_id)
+# times_rented = this_ids_rentals.count
+# index = 0
+
+# while index < (times_rented - 1) do
+#     rented_date = Faker::Date.between(from: ('2014-09-01'.to_date + index*7.days), to: ('2014-09-03'.to_date + index*7.days))
+#     returned_date = Faker::Date.between(from: ('2014-09-05'.to_date + index*7.days), to: ('2014-09-08'.to_date + index*7.days))
+#     rental = this_ids_rentals[index]
 #     rental.update(current: false,  created_at: rented_date, updated_at: returned_date)
 #     index += 1
+# end
+# end
+
+# # Get remaining active rental count.
+# active_rentals = Rental.all.where(current: true)
+
+# #Select 55% of remaining active_rentals to return on tiime, and 25% to return late. 20% will remain active
+# returned_on_date_number = (active_rentals.count * 0.55).ceil
+# returned_late_number = (active_rentals.count * 0.25).ceil
+
+# index = 0
+
+# # make some of the rentals be returned on time --- Rental date must fall after earlier rentals. 2 months later should work unless 1 vhs randlom gets 9 copies...
+# returned_on_date_number.times do
+# rented_date = Faker::Date.between(from: '2014-11-01', to: '2014-11-03')
+# returned_date = Faker::Date.between(from: '2014-11-05', to: '2014-11-08')
+# rental = Rental.find_by(id: active_rentals[index].id)
+# rental.update(current: false,  created_at: rented_date, updated_at: returned_date)
+# index += 1
 # end
 
 # # make some of the rentals be returned late
 # returned_late_number.times do
-#     rented_date = Faker::Date.between(from: '2010-01-01', to: '2015-06-01')
-#     returned_date = Faker::Date.between(from: '2015-06-15', to: 2.days.ago)
-#     rental = Rental.find(index)
-#     index += 1
-#     rental.update(current: false,  created_at: rented_date, updated_at: returned_date)
+# rented_date = Faker::Date.between(from: '2014-11-01', to: '2014-11-03')
+# returned_date = Faker::Date.between(from: '2015-06-15', to: 2.days.ago)
+# rental = rental = Rental.find_by(id: active_rentals[index].id)
+# index += 1
+# rental.update(current: false,  created_at: rented_date, updated_at: returned_date)
 # end
-
+################################### END OF FIX ################################
 
 puts "📼 📼 📼 📼 SEEDED 📼 📼 📼 📼 "
