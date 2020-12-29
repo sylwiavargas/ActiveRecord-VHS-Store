@@ -131,3 +131,11 @@ Build the following functionality:
 **READ**
 - `Genre.most_popular` - returns a list of 5 most popular genres based on number of movies
 - `Genre.longest_movies` - returns a genre whose movies length average is the highest (remember to also test it with an instance of a Genre that does not have any movies associated)
+
+---
+
+## Contributing
+
+Did you find a bug? A typo? Do you have an idea for a new hot deliverable? Please [create an issue](https://github.com/sylwiavargas/ActiveRecord-VHS-Store/issues) describing what change you'd like to see and whether you'd like to code it. Wait for my response and if it's a 👍, go ahead: fork the repo, write code and open a PR with a description of changes. 
+
+✨ Shoutout to [Danny Sasse](https://github.com/sylwiavargas/ActiveRecord-VHS-Store) for finding a squishing a bug in seeds! 
