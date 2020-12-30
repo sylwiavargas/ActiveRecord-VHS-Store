@@ -68,7 +68,7 @@ end
 - each method name should be descriptive,
 - it's always best think about where the method should live; for instance: is it a behavior of a Client? or is it a behavior of a Vhs instance and should be called from within an instance method of a Client?
 
-**NOTE**: all deliverables will make you a strong dev and will allow you for a good practice on ActiveRecord. Please spend some time on this lab, together with your partner or on your own. This lab can also be developed into a CLI that can serve as a strong portfolio piece or blog post material.
+**NOTE**: all deliverables will make you a strong dev and will allow you for a good practice on ActiveRecord. Please spend some time on this lab, together with your partner or on your own. This lab can also be developed into a CLI that can serve as a strong portfolio piece or blog post material. Check out Danny Sasse's blog post on how his pairing partner and he [implemented DRY solution](https://dsasse07.medium.com/abstracting-refactoring-in-ruby-with-send-97e6ef1a4661).
 
 --- 
 
