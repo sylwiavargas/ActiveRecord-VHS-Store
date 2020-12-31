@@ -7,7 +7,7 @@ class Rental < ActiveRecord::Base
     end
 
     def self.past_rentals_currently_available_vhs
-        self.all.select{|rental| !rental.current}.map(&:vhs)
+        self.select{|rental| !rental.current}.map(&:vhs)
     end
 
     def past_due_date?
@@ -15,11 +15,11 @@ class Rental < ActiveRecord::Base
     end
 
     def self.past_due_date
-        self.all.select{|rental| rental.past_due_date?}
+        self.select{|rental| rental.past_due_date?}
     end
 
     def self.currently_past_due_date
-        self.all.select{|rental| rental.current && rental.due_date < rental.updated_at}
+        self.select{|rental| rental.current && rental.past_due_date?}
     end
 
 end

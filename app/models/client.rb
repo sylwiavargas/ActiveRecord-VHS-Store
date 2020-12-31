@@ -86,7 +86,7 @@ class Client < ActiveRecord::Base
     end
 
     def self.total_watch_time
-        self.all.sum{|client| client.total_watch_time}
+        self.sum{|client| client.total_watch_time}
     end
 
     def last_return

@@ -28,7 +28,7 @@ class Vhs < ActiveRecord::Base
     end
 
     def self.available_now
-        self.all.select{|vhs| vhs.rentals.empty?} + Rental.past_rentals_currently_available_vhs
+        self.select{|vhs| vhs.rentals.empty?} + Rental.past_rentals_currently_available_vhs
     end
 
     def self.hot_from_the_press(args_hash, genre_str)
