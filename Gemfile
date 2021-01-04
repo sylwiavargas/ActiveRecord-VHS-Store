@@ -10,3 +10,4 @@ gem "require_all"
 gem "sqlite3"
 gem "pry"
 gem "faker"
+gem 'ruby_emoji'

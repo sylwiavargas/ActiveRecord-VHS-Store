@@ -1,14 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (5.2.4.3)
-      activesupport (= 5.2.4.3)
-    activerecord (5.2.4.3)
-      activemodel (= 5.2.4.3)
-      activesupport (= 5.2.4.3)
+    activemodel (5.2.4.4)
+      activesupport (= 5.2.4.4)
+    activerecord (5.2.4.4)
+      activemodel (= 5.2.4.4)
+      activesupport (= 5.2.4.4)
       arel (>= 9.0)
     activerecord-reset-pk-sequence (0.2.1)
-    activesupport (5.2.4.3)
+    activesupport (5.2.4.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -17,35 +17,36 @@ GEM
     coderay (1.1.3)
     colorize (0.8.1)
     concurrent-ruby (1.1.7)
-    faker (2.13.0)
+    faker (2.15.1)
       i18n (>= 1.6, < 2)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     method_source (1.0.0)
-    minitest (5.14.1)
+    minitest (5.14.2)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
     rack (2.2.3)
-    rack-protection (2.0.8.1)
+    rack-protection (2.1.0)
       rack
-    rake (13.0.1)
+    rake (13.0.3)
     require_all (3.0.0)
     ruby2_keywords (0.0.2)
-    sinatra (2.0.8.1)
+    ruby_emoji (1.0.0)
+    sinatra (2.1.0)
       mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
       tilt (~> 2.0)
-    sinatra-activerecord (2.0.18)
+    sinatra-activerecord (2.0.21)
       activerecord (>= 4.1)
       sinatra (>= 1.0)
     sqlite3 (1.4.2)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    tzinfo (1.2.7)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
 
 PLATFORMS
@@ -59,6 +60,7 @@ DEPENDENCIES
   pry
   rake
   require_all
+  ruby_emoji
   sinatra-activerecord
   sqlite3
 
