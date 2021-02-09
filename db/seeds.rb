@@ -248,5 +248,14 @@ puts "✨ creating rentals... ✨"
 #     rental.update(current: false,  created_at: rented_date, updated_at: returned_date)
 # end
 
+# # make some of the rentals currently past due date
+# unreturned_still_late.times do
+#     date = Faker::Date.between(from: '2020-01-01', to: '2021-01-06')
+#     rental = Rental.find(index)
+#     index += 1
+#     rental.update(current: true,  created_at: date, updated_at: date)
+# end
+
+
 
 puts "📼 📼 📼 📼 SEEDED 📼 📼 📼 📼 "
