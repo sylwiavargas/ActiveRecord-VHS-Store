@@ -226,7 +226,8 @@ puts "✨ creating rentals... ✨"
 # end
 
 # returned_on_date_number = (Rental.count * 0.55).ceil
-# returned_late_number = (Rental.count * 0.25).ceil
+# returned_late_number = (Rental.count * 0.15).ceil
+# unreturned_still_late = (Rental.count * 0.1).ceil
 
 # index = 1
 
