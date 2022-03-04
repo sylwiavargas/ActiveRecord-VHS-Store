@@ -140,5 +140,6 @@ Build the following functionality:
 
 Did you find a bug? A typo? Do you have an idea for a new hot deliverable? Please [create an issue](https://github.com/sylwiavargas/ActiveRecord-VHS-Store/issues) describing what change you'd like to see and whether you'd like to code it. Wait for my response and if it's a 👍, go ahead: fork the repo, write code and open a PR with a description of changes. 
 
-✨ Shoutout to [Danny Sasse](https://github.com/sylwiavargas/ActiveRecord-VHS-Store) for finding a squishing a bug in seeds! 
+✨ Shoutout to [Danny Sasse](https://github.com/sylwiavargas/ActiveRecord-VHS-Store) for finding a squishing a bug in seeds!
+
 ✨ Shoutout to [Danny Sasse](https://github.com/dsasse07) and [Simon Jacobs](https://github.com/simonjacobs212) for providing an alternative solution that involves modules and code that follows DRY principle.
