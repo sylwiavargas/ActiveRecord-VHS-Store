@@ -138,7 +138,7 @@ Build the following functionality:
 
 ## Contributing
 
-Did you find a bug? A typo? Do you have an idea for a new hot deliverable? Please [create an issue](https://github.com/sylwiavargas/ActiveRecord-VHS-Store/issues) describing what change you'd like to see and whether you'd like to code it. Wait for my response and if it's a 👍, go ahead: fork the repo, write code and open a PR with a description of changes. 
+Did you find a bug? A typo? Do you have an idea for a new hot deliverable? Are you proud of a solution you've submitted and would like it to be featured as a branch here? Please [create an issue](https://github.com/sylwiavargas/ActiveRecord-VHS-Store/issues) describing what change you'd like to see and whether you'd like to code it. Wait for my response and if it's a 👍, go ahead: fork the repo, write code and open a PR with a description of changes. 
 
 ✨ Shoutout to [Danny Sasse](https://github.com/sylwiavargas/ActiveRecord-VHS-Store) for finding a squishing a bug in seeds!
 
